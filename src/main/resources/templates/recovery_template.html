@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http–equiv=“Content-Type” content=“text/html; charset=UTF-8” />
+    <title>Recovery Email Template</title>
+</head>
+<style>
+    body{
+        width: 600px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header{
+        background-color: #203340;
+        padding: 10px;
+        border-radius: 0px 0px 18px 18px;
+        text-align: center;
+    }
+    .button{
+        background-color: #203340; 
+        border: none;
+        color: lightgrey;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 18px;
+    }
+    .centered{
+        text-align: center;
+    }
+    section{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+    .logo{
+        width: 150px;
+    }
+</style>
+<body>
+    <header>
+        <br>
+    </header>
+    <section>
+        <br>
+        <h3>Olá USER_NAME!</h3>
+        <br>
+        <p>Foi realizada uma solicitação de troca de senha pelo sistema eQualy às RECOVERY_TIMESTAMP</p>
+        <p>O link de alteração expirará dentro de 30 minutos após o envio deste e-mail, não o compartilhe com ninguém.</p>
+        <br>
+        <p>Seu código de recuperação é:</p>
+        <br>
+        <h2>RECOVERY_CODE</h2>
+        <br>
+        <p>Para recuperar acesse o link único no botão abaixo e insira o código, ou <a href="#">Clique aqui.</a></p>
+        <br>
+    </section>
+    <br>
+    <section>
+        <div class="centered">
+            <a href="#" class="button">Alterar Senha</a>
+        </div>
+    </section>
+    
+</body>
+</html>

@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: "/messenger/v1"
+  security:
+    tokenSecret: ${TOKEN_SECRET}
+
+spring:
+  redis:
+    database: ${CACHE_DATABASE}
+    host: ${CACHE_URL}
+    port: ${CACHE_PORT}
+    password: ${CACHE_SECRET}
+    timeout: 5000
+  azure:
+    communication-services:
+      connection: ${AZURE_EMAIL_CONNECTION}
+      sender: ${AZURE_EMAIL_SENDER}
+  rabbitmq:
+    host: ${MESSENGER_HOST}
+    port: ${MESSENGER_PORT}
+    username: ${MESSENGER_USERNAME}
+    password: ${MESSENGER_SECRET}
+    messenger:
+      queue: ${MESSENGER_QUEUE}
+
+logging:
+  level:
+    root: debug
