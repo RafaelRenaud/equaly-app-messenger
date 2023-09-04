@@ -49,6 +49,11 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
@@ -73,12 +78,6 @@
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
 			<version>4.3.0</version>
-		</dependency>
-
-		<!-- Azure Email Dependency -->
-		<dependency>
-			<groupId>com.azure</groupId>
-			<artifactId>azure-communication-email</artifactId>
 		</dependency>
 
 		<!-- RabbitMQ Dependency -->

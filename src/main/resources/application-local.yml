@@ -12,10 +12,17 @@ spring:
     port: ${CACHE_PORT}
     password: ${CACHE_SECRET}
     timeout: 5000
-  azure:
-    communication-services:
-      connection: ${AZURE_EMAIL_CONNECTION}
-      sender: ${AZURE_EMAIL_SENDER}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_SECRET}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   rabbitmq:
     host: ${MESSENGER_HOST}
     port: ${MESSENGER_PORT}
