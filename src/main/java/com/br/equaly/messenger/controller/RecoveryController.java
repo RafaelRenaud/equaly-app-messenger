@@ -9,12 +9,12 @@ import com.br.equaly.messenger.service.impl.RecoveryEmailServiceImpl;
 import com.br.equaly.messenger.service.impl.TokenServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.mail.MessagingException;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @RestController
@@ -26,9 +26,9 @@ public class RecoveryController {
     @Autowired
     private TokenServiceImpl tokenService;
 
-    @RabbitListener(queues = {"${spring.rabbitmq.messenger.queue}"})
-    public void receiveRecoveryEmail(@Payload String message) throws IOException, MessagingException {
-        System.out.println("******** MESSAGE RECEIVED: "+ message + " ********");
+    @JmsListener(destination = "${spring.jms.email.queue-name}")
+    public void receiveRecoveryEmail(byte[] message) throws IOException, MessagingException {
+        System.out.println("******** MESSAGE RECEIVED: "+ new String(message, StandardCharsets.UTF_8) + " ********");
 
         RecoveryRequestDTO recoveryRequestDTO = new ObjectMapper().readValue(message, RecoveryRequestDTO.class);
 
