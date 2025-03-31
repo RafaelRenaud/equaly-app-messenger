@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.4</version>
+		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.br.equaly.messenger</groupId>
@@ -15,20 +15,25 @@
 	<description>eQualy Email Communication Service</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring-cloud-azure.version>5.2.0</spring-cloud-azure.version>
+		<spring-cloud-azure.version>5.21.0</spring-cloud-azure.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.azure.spring</groupId>
+				<artifactId>spring-cloud-azure-dependencies</artifactId>
+				<version>${spring-cloud-azure.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -37,11 +42,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
 		<dependency>
@@ -59,37 +59,31 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Azure Dependencies -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
+			<groupId>com.microsoft.azure.functions</groupId>
+			<artifactId>azure-functions-java-library</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-storage-queue</artifactId>
+			<version>12.23.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-communication-email</artifactId>
+			<version>1.1.0-beta.1</version>
 		</dependency>
 
-		<!-- JWT DEPENDENCY -->
+		<!-- HTML Template Dependency -->
 		<dependency>
-			<groupId>com.auth0</groupId>
-			<artifactId>java-jwt</artifactId>
-			<version>4.3.0</version>
-		</dependency>
-
-		<!-- Azure Service Bus Dependency -->
-		<dependency>
-			<groupId>com.azure.spring</groupId>
-			<artifactId>spring-cloud-azure-starter-servicebus-jms</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.azure.spring</groupId>
-				<artifactId>spring-cloud-azure-dependencies</artifactId>
-				<version>${spring-cloud-azure.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>

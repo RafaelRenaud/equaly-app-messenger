@@ -45,14 +45,15 @@
     </header>
     <section>
         <br>
-        <h3>Olá USER_NAME!</h3>
+        <h3>Olá <span th:text="${username}"></span>!</h3>
         <br>
-        <p>Foi realizada uma solicitação de troca de senha pelo sistema eQualy às RECOVERY_TIMESTAMP</p>
+        <p>Foi realizada uma solicitação de troca de senha pelo sistema eQualy às <span th:text="${timestamp}"></span></p>
         <p>O link de alteração expirará dentro de 30 minutos após o envio deste e-mail, não o compartilhe com ninguém.</p>
+        <p>Se não foi você quem realizou a alteração, por favor ignore este e-mail.</p>
         <br>
         <p>Seu código de recuperação é:</p>
         <br>
-        <h2>RECOVERY_CODE</h2>
+        <h2><span th:text="${rac}"></span></h2>
         <br>
     </section>
     <br>
