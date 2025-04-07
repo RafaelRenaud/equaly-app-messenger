@@ -1,23 +1,6 @@
 server:
-  port: ${SERVER_PORT}
-  servlet:
-    context-path: "/messenger/v1"
-
-spring:
-  data:
-    redis:
-      database: ${CACHE_DATABASE}
-      host: ${CACHE_URL}
-      port: ${CACHE_PORT}
-      password: ${CACHE_SECRET}
-      timeout: 5000
-
+  port: ${SERVER_PORT:8080}
 azure:
-  storage:
-    queue:
-      connection-string: ${MQ_SERVER}
-      recovery:
-        name: ${RECOVERY_MQ_NAME}
   communication-service:
     connection-string: ${EMAIL_SERVER}
 

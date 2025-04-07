@@ -2,66 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta http–equiv=“Content-Type” content=“text/html; charset=UTF-8” />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recovery Email Template</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            .logo-img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    </style>
 </head>
-<style>
-    body{
-        width: 600px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    header{
-        background-color: #203340;
-        padding: 10px;
-        border-radius: 0px 0px 18px 18px;
-    }
-    .button{
-        background-color: #203340; 
-        border: none;
-        color: lightgrey;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        border-radius: 18px;
-    }
-    .centered{
-        text-align: center;
-    }
-    section{
-        margin-left: 50px;
-        margin-right: 50px;
-    }
-    .logo{
-        width: 150px;
-    }
-</style>
 <body>
-    <header>
-        <div class="centered">
-            <img src="cid:logo" class="logo"/>
-        </div>
-    </header>
-    <section>
-        <br>
-        <h3>Olá <span th:text="${username}"></span>!</h3>
-        <br>
-        <p>Foi realizada uma solicitação de troca de senha pelo sistema eQualy às <span th:text="${timestamp}"></span></p>
-        <p>O link de alteração expirará dentro de 30 minutos após o envio deste e-mail, não o compartilhe com ninguém.</p>
-        <p>Se não foi você quem realizou a alteração, por favor ignore este e-mail.</p>
-        <br>
-        <p>Seu código de recuperação é:</p>
-        <br>
-        <h2><span th:text="${rac}"></span></h2>
-        <br>
-    </section>
-    <br>
-<!--    <section>-->
-<!--        <div class="centered">-->
-<!--            <a href="#" class="button">Alterar Senha</a>-->
-<!--        </div>-->
-<!--    </section>-->
-    
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #F4F4F4; padding: 20px;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse: collapse; background: white; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <!-- Header -->
+                <tr>
+                    <td align="center" style="background-color: #203340; padding: 10px; border-radius: 10px 10px 0 0;">
+                        <img src="https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png" alt="Logo da Empresa" class="logo-img"
+                             style="width: 150px; display: block; margin: 0 auto; filter: drop-shadow(0 0 3px #000);" />
+                    </td>
+                </tr>
+
+                <!-- Content -->
+                <tr>
+                    <td style="padding: 20px; font-family: Arial, sans-serif; color: #4A4A4A;">
+                        <h3>Olá <span th:text="${username}"></span>,</h3>
+                        <p>Foi realizada uma solicitação de ativação ou troca de senha pelo sistema eQualy às <span th:text="${createdAt}"></span>.</p>
+                        <p>O link de alteração expirará dentro de 30 minutos após o envio deste e-mail, não o compartilhe com ninguém.</p>
+                        <p>Se não foi você quem realizou a solicitação de alteração ou cadastro, por favor ignore este e-mail.</p>
+                        <br>
+                        <p><strong>Usuário:</strong> <i><span th:text="${companyUsername}"></span></i></p>
+                        <p><strong>Empresa:</strong> <i><span th:text="${companyDisplayName}"></span></i></p>
+                        <p><strong>Razão Social:</strong> <i><span th:text="${companyName}"></span></i></p>
+                        <p><strong>Código da Empresa:</strong> <i><span th:text="${companyAlias}"></span></i></p>
+                        <br>
+                        <p>Seu código de recuperação é:</p>
+                        <h2 style="color: #203340;"><span th:text="${code}"></span></h2>
+                        <br>
+                    </td>
+                </tr>
+
+                <!-- Button -->
+                <tr>
+                    <td align="center" style="padding-bottom: 20px;">
+                        <a th:href="${resetLink}"
+                           style="background-color: #203340; color: white; padding: 12px 25px; text-decoration: none; border-radius: 10px; display: inline-block; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"
+                           onmouseover="this.style.backgroundColor='#1A2A36';"
+                           onmouseout="this.style.backgroundColor='#203340';">
+                            Alterar Senha
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
