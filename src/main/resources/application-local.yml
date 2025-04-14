@@ -3,6 +3,10 @@ server:
 azure:
   communication-service:
     connection-string: ${EMAIL_SERVER}
+  storage:
+    connection-string: ${MQ_SERVER}
+    queue:
+      recovery: ${RECOVERY_QUEUE}
 
 logging:
   level:

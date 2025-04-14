@@ -37,6 +37,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
@@ -53,11 +57,6 @@
 
 		<!-- Azure Dependencies -->
 		<dependency>
-			<groupId>com.microsoft.azure.functions</groupId>
-			<artifactId>azure-functions-java-library</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
 			<groupId>com.azure</groupId>
 			<artifactId>azure-storage-queue</artifactId>
 			<version>12.23.0</version>
@@ -65,7 +64,7 @@
 		<dependency>
 			<groupId>com.azure</groupId>
 			<artifactId>azure-communication-email</artifactId>
-			<version>1.1.0-beta.1</version>
+			<version>1.0.17</version>
 		</dependency>
 
 		<!-- HTML Template Dependency -->
@@ -78,37 +77,9 @@
 
 	<build>
 		<plugins>
-			<!-- Azure Function Plugin -->
-			<plugin>
-				<groupId>com.microsoft.azure</groupId>
-				<artifactId>azure-functions-maven-plugin</artifactId>
-				<version>1.35.0</version>
-				<configuration>
-					<resourceGroup>equalyServelessResourceGroup</resourceGroup>
-					<appName>equalymessenger</appName>
-					<region>eastus2</region>
-					<runtime>
-						<os>linux</os>
-						<javaVersion>Java 17</javaVersion>
-					</runtime>
-					<deploymentType>jar</deploymentType>
-				</configuration>
-			</plugin>
-
-			<!-- Maven Build Plugin (Should Be at the end) -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<layout>ZIP</layout>
-					<executable>false</executable>
-				</configuration>
-				<executions>
-					<execution>
-						<id>repackage</id>
-						<phase>none</phase>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
