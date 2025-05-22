@@ -4,6 +4,7 @@ import com.azure.communication.email.EmailClient;
 import com.azure.communication.email.models.EmailAddress;
 import com.azure.communication.email.models.EmailMessage;
 import com.br.equaly.messenger.application.port.out.RecoveryEmailSenderPort;
+import com.br.equaly.messenger.domain.enums.RecoveryTokenType;
 import com.br.equaly.messenger.domain.model.RecoveryToken;
 import com.br.equaly.messenger.util.UtilTools;
 import org.springframework.stereotype.Component;
@@ -28,21 +29,32 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
     @Override
     public void sendRecoveryEmail(RecoveryToken recoveryToken) {
         Context context = new Context();
+        String emailBody;
+
         context.setVariable("username", recoveryToken.getUsername());
         context.setVariable("createdAt", UtilTools.formatTimestamp(recoveryToken.getCreatedAt()));
         context.setVariable("companyUsername", recoveryToken.getCompanyUsername());
-        context.setVariable("companyDisplayName", recoveryToken.getCompanyDisplayName());
+        context.setVariable("companyTradingName", recoveryToken.getCompanyTradingName());
         context.setVariable("companyName", recoveryToken.getCompanyName());
         context.setVariable("companyAlias", recoveryToken.getCompanyAlias());
-        context.setVariable("code", recoveryToken.getCode());
 
-        String emailBody = templateEngine.process("recovery_template", context);
-
-        EmailMessage emailMessage = new EmailMessage()
-                .setSubject("Solicitação de Alteração de Senha - eQualy")
-                .setBodyHtml(emailBody)
-                .setSenderAddress("DoNotReply@7b57c237-e913-481a-8ad1-2157ec7069e6.azurecomm.net")
-                .setToRecipients(new EmailAddress(recoveryToken.getEmail()));
-        emailClient.beginSend(emailMessage);
+        if(recoveryToken.getRecoveryTokenType().equals(RecoveryTokenType.RAC_RECOVERY)){
+            context.setVariable("code", recoveryToken.getCode());
+            emailBody = templateEngine.process("recovery_template", context);
+            EmailMessage emailMessage = new EmailMessage()
+                    .setSubject("eQualy - Solicitação de Alteração de Senha")
+                    .setBodyHtml(emailBody)
+                    .setSenderAddress("DoNotReply@7b57c237-e913-481a-8ad1-2157ec7069e6.azurecomm.net")
+                    .setToRecipients(new EmailAddress(recoveryToken.getEmail()));
+            emailClient.beginSend(emailMessage);
+        }else if(recoveryToken.getRecoveryTokenType().equals(RecoveryTokenType.ACCOUNT_RECOVERY)){
+            emailBody = templateEngine.process("account_recovery_template", context);
+            EmailMessage emailMessage = new EmailMessage()
+                    .setSubject("eQualy - Senha Alterada")
+                    .setBodyHtml(emailBody)
+                    .setSenderAddress("DoNotReply@7b57c237-e913-481a-8ad1-2157ec7069e6.azurecomm.net")
+                    .setToRecipients(new EmailAddress(recoveryToken.getEmail()));
+            emailClient.beginSend(emailMessage);
+        }
     }
 }

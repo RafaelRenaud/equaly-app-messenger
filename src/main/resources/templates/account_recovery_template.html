@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Recuperação de Senha</title>
+    <title>Senha Alterada</title>
     <style>
         body {
             margin: 0;
@@ -103,28 +103,12 @@
                 <tr>
                     <td class="email-body">
                         <h3>Olá <span th:text="${username}"></span>,</h3>
-                        <p>Foi realizada uma solicitação de ativação ou troca de senha pelo sistema eQualy às <span th:text="${createdAt}"></span>.</p>
-                        <p>O código enviado expirará dentro de 30 minutos após o envio deste e-mail, não o compartilhe com ninguém.</p>
-                        <p>Se não foi você quem realizou a solicitação, por favor ignore este e-mail.</p>
+                        <p>Foi realizada uma alteração de senha de usuário atrelado a este e-mail pelo sistema eQualy às <span th:text="${createdAt}"></span>.</p>
+                        <p>Se não foi você quem realizou a alteração, por favor entre em contato com o administrador do sistema de sua empresa.</p>
 
                         <p><strong>Usuário:</strong> <i><span th:text="${companyUsername}"></span></i></p>
                         <p><strong>Empresa:</strong> <i><span th:text="${companyName}"></span></i></p>
                         <p><strong>Razão Social:</strong> <i><span th:text="${companyTradingName}"></span></i></p>
-                        <p><strong>Código da Empresa:</strong> <i><span th:text="${companyAlias}"></span></i></p>
-
-                        <p>Seu código de ativação ou recuperação é:</p>
-                        <h2 class="recovery-code" style="letter-spacing: 4px; font-size: 24px; color: #203340;">
-                            <span th:text="${code}"></span>
-                        </h2>
-                    </td>
-                </tr>
-
-                <!-- Button -->
-                <tr>
-                    <td class="button-wrapper">
-                        <a th:href="${resetLink}">
-                            Alterar Senha
-                        </a>
                     </td>
                 </tr>
             </table>

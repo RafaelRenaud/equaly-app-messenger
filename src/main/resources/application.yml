@@ -3,6 +3,10 @@ server:
 azure:
   communication-service:
     connection-string: ${EMAIL_SERVER}
+  messenger:
+    connection-string: ${MQ_SERVER}
+    recovery: ${RECOVERY_QUEUE}
+    notification: ${ADMIN_NOTIFICATION_QUEUE}
 
 logging:
   level:
