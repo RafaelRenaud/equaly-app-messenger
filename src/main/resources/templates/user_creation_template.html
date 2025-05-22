@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Atualização de Departamento</title>
+    <title>Criação de Usuário</title>
     <style>
         body {
             margin: 0;
@@ -102,18 +102,22 @@
                 <!-- Content -->
                 <tr>
                     <td class="email-body">
-                        <h3>A <span th:text="${companyDisplayName}"></span>,</h3>
-                        <p>Fora atualizadas informações de um departamento a empresa abaixo no sistema eQualy às <span th:text="${actionAt}"></span> pelo usuário <span th:text="${actionBy}"></span>.</p>
-                        <p>Este e-mail foi enviado ao requisitante e ao cadastrado como responsável principal pela empresa. Por favor, se houver alguma inconsistência de informações, contate o nosso time de suporte.</p>
+                        <h3>Olá <span th:text="${universalUsername}"></span>,</h3>
+                        <p>Foi realizado seu cadastro no sistema eQualy em <span th:text="${actionAt}"></span> pelo usuário <span th:text="${actionBy}"></span>.</p>
+                        <p>Em breve, você receberá em e-mail com as instruções para a ativação da sua conta com um código. Não o compartilhe com ninguém. </p>
+                        <p>Por favor, se houver alguma inconsistência de informações, contate o nosso time de suporte.</p>
 
                         <br>
                         <p><strong>Empresa:</strong> <i><span th:text="${companyName}"></span></i></p>
                         <p><strong>Razão Social:</strong> <i><span th:text="${companyTradingName}"></span></i></p>
+                        <p><strong>Departamento:</strong> <i><span th:text="${departmentName}"></span></i></p>
                         <br>
-                        <h3>Informações do Departamento</h3>
-                        <p><strong>Nome:</strong> <i><span th:text="${departmentName}"></span></i></p>
-                        <p><strong>Descrição:</strong> <i><span th:text="${departmentDescription}"></span></i></p>
-                        <p><strong>Status:</strong> <i><span th:text="${departmentStatus}"></span></i></p>
+                        <h3>Informações de Usuário</h3>
+                        <p><strong>Nome:</strong> <i><span th:text="${username}"></span></i></p>
+                        <p><strong>Apelido:</strong> <i><span th:text="${nickname}"></span></i></p>
+                        <p><strong>Login:</strong> <i><span th:text="${login}"></span></i></p>
+                        <p><strong>E-Mail:</strong> <i><span th:text="${email}"></span></i></p>
+                        <p><strong>Documento:</strong> <i><span th:text="${documentNumber}"></span></i></p>
                         <br>
                     </td>
                 </tr>

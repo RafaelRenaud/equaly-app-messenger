@@ -102,15 +102,17 @@
                 <!-- Content -->
                 <tr>
                     <td class="email-body">
-                        <h3>Boas-vindas ao sistema eQualy, <span th:text="${companyDisplayName}"></span>!</h3>
-                        <p>A empresa abaixo foi cadastrada com sucesso no sistema eQualy às <span th:text="${actionAt}"></span> pelo usuário <span th:text="${actionBy}"></span>.</p>
+                        <h3>Boas-Vindas a <span th:text="${companyDisplayName}"></span>!</h3>
+                        <p>A empresa abaixo foi cadastrada com sucesso no sistema eQualy em <span th:text="${actionAt}"></span> pelo usuário <span th:text="${actionBy}"></span>.</p>
                         <p>Este e-mail foi enviado ao requisitante e ao cadastrado como responsável principal pela empresa. Por favor, se houver alguma inconsistência de informações, contate o nosso time de suporte.</p>
 
+                        <br>
                         <p><strong>Empresa:</strong> <i><span th:text="${companyName}"></span></i></p>
                         <p><strong>Razão Social:</strong> <i><span th:text="${companyTradingName}"></span></i></p>
                         <p><strong>Código da Empresa:</strong> <i><span th:text="${companyAlias}"></span></i></p>
                         <p><strong>CNPJ:</strong> <i><span th:text="${companyDocument}"></span></i></p>
                         <p><strong>Contato Responsável:</strong> <i><span th:text="${companyContact}"></span></i></p>
+                        <br>
                     </td>
                 </tr>
             </table>

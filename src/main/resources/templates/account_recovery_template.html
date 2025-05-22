@@ -103,12 +103,13 @@
                 <tr>
                     <td class="email-body">
                         <h3>Olá <span th:text="${username}"></span>,</h3>
-                        <p>Foi realizada uma alteração de senha de usuário atrelado a este e-mail pelo sistema eQualy às <span th:text="${createdAt}"></span>.</p>
+                        <p>Foi realizada uma alteração de senha de usuário atrelado a este e-mail pelo sistema eQualy em <span th:text="${createdAt}"></span>.</p>
                         <p>Se não foi você quem realizou a alteração, por favor entre em contato com o administrador do sistema de sua empresa.</p>
-
+                        <br>
                         <p><strong>Usuário:</strong> <i><span th:text="${companyUsername}"></span></i></p>
                         <p><strong>Empresa:</strong> <i><span th:text="${companyName}"></span></i></p>
                         <p><strong>Razão Social:</strong> <i><span th:text="${companyTradingName}"></span></i></p>
+                        </br>
                     </td>
                 </tr>
             </table>

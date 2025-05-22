@@ -106,10 +106,14 @@
                         <p>Foi cadastrado um novo departamento a empresa abaixo no sistema eQualy às <span th:text="${actionAt}"></span> pelo usuário <span th:text="${actionBy}"></span>.</p>
                         <p>Este e-mail foi enviado ao requisitante e ao cadastrado como responsável principal pela empresa. Por favor, se houver alguma inconsistência de informações, contate o nosso time de suporte.</p>
 
+                        <br>
                         <p><strong>Empresa:</strong> <i><span th:text="${companyName}"></span></i></p>
                         <p><strong>Razão Social:</strong> <i><span th:text="${companyTradingName}"></span></i></p>
-                        <p><strong>Departamento:</strong> <i><span th:text="${departmentName}"></span></i></p>
+                        <br>
+                        <h3>Informações do Departamento</h3>
+                        <p><strong>Nome:</strong> <i><span th:text="${departmentName}"></span></i></p>
                         <p><strong>Descrição:</strong> <i><span th:text="${departmentDescription}"></span></i></p>
+                        <br>
                     </td>
                 </tr>
             </table>

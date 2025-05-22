@@ -103,10 +103,10 @@
                 <tr>
                     <td class="email-body">
                         <h3>Olá <span th:text="${username}"></span>,</h3>
-                        <p>Foi realizada uma solicitação de ativação ou troca de senha pelo sistema eQualy às <span th:text="${createdAt}"></span>.</p>
+                        <p>Foi realizada uma solicitação de ativação ou troca de senha pelo sistema eQualy em <span th:text="${createdAt}"></span>.</p>
                         <p>O código enviado expirará dentro de 30 minutos após o envio deste e-mail, não o compartilhe com ninguém.</p>
                         <p>Se não foi você quem realizou a solicitação, por favor ignore este e-mail.</p>
-
+                        <br>
                         <p><strong>Usuário:</strong> <i><span th:text="${companyUsername}"></span></i></p>
                         <p><strong>Empresa:</strong> <i><span th:text="${companyName}"></span></i></p>
                         <p><strong>Razão Social:</strong> <i><span th:text="${companyTradingName}"></span></i></p>
@@ -116,6 +116,7 @@
                         <h2 class="recovery-code" style="letter-spacing: 4px; font-size: 24px; color: #203340;">
                             <span th:text="${code}"></span>
                         </h2>
+                        <br>
                     </td>
                 </tr>
 

@@ -43,13 +43,14 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
 
         if(messageNotification.messageType().equals(MessageType.COMPANY_CREATION) || messageNotification.messageType().equals(MessageType.COMPANY_UPDATE)){
             context.setVariable("companyAlias", messageNotification.companyAlias());
-            context.setVariable("companyDocument", messageNotification.companyDocument());
+            context.setVariable("companyDocument", UtilTools.formatCnpj(messageNotification.companyDocument()));
             context.setVariable("companyContact", messageNotification.companyContact());
 
             if(messageNotification.messageType().equals(MessageType.COMPANY_CREATION)){
                 emailBody = templateEngine.process("company_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Empresa Efetuado";
             }else{
+                context.setVariable("companyStatus", (messageNotification.data().get("companyStatus").equals("ACTIVE")? "Ativo" : "Inativo"));
                 emailBody = templateEngine.process("company_update_template", context);
                 emailTitle = "eQualy - Atualização de Empresa Efetuada";
             }
@@ -62,7 +63,7 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
 
         if(messageNotification.messageType().equals(MessageType.COMPANY_CREDENTIAL_CREATION) || messageNotification.messageType().equals(MessageType.COMPANY_CREDENTIAL_INACTIVATION)){
             context.setVariable("companyAlias", messageNotification.companyAlias());
-            context.setVariable("companyDocument", messageNotification.companyDocument());
+            context.setVariable("companyDocument", UtilTools.formatCnpj(messageNotification.companyDocument()));
             context.setVariable("companyContact", messageNotification.companyContact());
             context.setVariable("credentialType", (messageNotification.data().get("credentialType").equals("ADMINISTRATIVE") ? "Administrativa" : "Operacional"));
             context.setVariable("credentialValue", messageNotification.data().get("credentialValue"));
@@ -71,7 +72,7 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
                 emailBody = templateEngine.process("credential_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Credencial Efetuada";
             }else{
-                emailBody = templateEngine.process("company_update_template", context);
+                emailBody = templateEngine.process("credential_inactivation_template", context);
                 emailTitle = "eQualy - Inativação de Credencial Efetuada";
             }
 
@@ -89,6 +90,7 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
                 emailBody = templateEngine.process("department_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Departamento Efetuado";
             }else{
+                context.setVariable("departmentStatus", (messageNotification.data().get("departmentStatus").equals("ACTIVE")? "Ativo" : "Inativo"));
                 emailBody = templateEngine.process("department_update_template", context);
                 emailTitle = "eQualy - Atualização de Departamento Efetuado";
             }
@@ -104,6 +106,29 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
                 ));
             }
 
+        }
+
+        if(messageNotification.messageType().equals(MessageType.USER_CREATION) || messageNotification.messageType().equals(MessageType.USER_UPDATE)){
+            context.setVariable("universalUsername", messageNotification.data().get("universalUsername"));
+            context.setVariable("departmentName", messageNotification.data().get("departmentName"));
+            context.setVariable("username", messageNotification.data().get("username"));
+            context.setVariable("nickname", messageNotification.data().get("nickname"));
+            context.setVariable("login", messageNotification.data().get("login"));
+            context.setVariable("email", messageNotification.data().get("email"));
+            context.setVariable("documentNumber", messageNotification.data().get("documentNumber"));
+
+            if(messageNotification.messageType().equals(MessageType.USER_CREATION)){
+                emailBody = templateEngine.process("user_creation_template", context);
+                emailTitle = "eQualy - Cadastro de Usuário";
+            }else{
+                context.setVariable("status", (messageNotification.data().get("status").equals("ACTIVE")? "Ativo" : "Inativo"));
+                emailBody = templateEngine.process("user_update_template", context);
+                emailTitle = "eQualy - Atualização de Usuário";
+            }
+
+            recipients.add(
+                    new EmailAddress(messageNotification.data().get("email"))
+            );
         }
 
         EmailMessage emailMessage = new EmailMessage()
