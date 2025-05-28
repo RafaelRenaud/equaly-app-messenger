@@ -112,7 +112,6 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
             context.setVariable("universalUsername", messageNotification.data().get("universalUsername"));
             context.setVariable("departmentName", messageNotification.data().get("departmentName"));
             context.setVariable("username", messageNotification.data().get("username"));
-            context.setVariable("nickname", messageNotification.data().get("nickname"));
             context.setVariable("login", messageNotification.data().get("login"));
             context.setVariable("email", messageNotification.data().get("email"));
             context.setVariable("documentNumber", messageNotification.data().get("documentNumber"));
