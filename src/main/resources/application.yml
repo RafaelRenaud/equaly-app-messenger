@@ -8,6 +8,10 @@ azure:
     recovery: ${RECOVERY_QUEUE}
     notification: ${ADMIN_NOTIFICATION_QUEUE}
 
+client:
+  reset-password:
+    url: ${RESET_PASSWORD_URL:http://localhost:4200}
+
 logging:
   level:
     root: info

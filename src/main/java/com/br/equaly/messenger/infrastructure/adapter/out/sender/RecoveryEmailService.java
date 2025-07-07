@@ -7,10 +7,13 @@ import com.br.equaly.messenger.application.port.out.RecoveryEmailSenderPort;
 import com.br.equaly.messenger.domain.enums.RecoveryTokenType;
 import com.br.equaly.messenger.domain.model.RecoveryToken;
 import com.br.equaly.messenger.util.UtilTools;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
 
@@ -20,6 +23,9 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
     private final EmailClient emailClient;
     private final TemplateEngine templateEngine;
     private static final Logger LOGGER = Logger.getLogger(RecoveryEmailService.class.getName());
+
+    @Value("${client.reset-password.url}")
+    private String resetLink;
 
     public RecoveryEmailService(EmailClient emailClient, TemplateEngine templateEngine) {
         this.emailClient = emailClient;
@@ -40,6 +46,11 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
 
         if(recoveryToken.getRecoveryTokenType().equals(RecoveryTokenType.RAC_RECOVERY)){
             context.setVariable("code", recoveryToken.getCode());
+            context.setVariable("resetLink",
+                    resetLink.concat("/recovery?token=")
+                            .concat(recoveryToken.getId())
+            .concat("&email=")
+            .concat(URLEncoder.encode(recoveryToken.getEmail(), StandardCharsets.UTF_8)));
             emailBody = templateEngine.process("recovery_template", context);
             EmailMessage emailMessage = new EmailMessage()
                     .setSubject("eQualy - Solicitação de Alteração de Senha")
