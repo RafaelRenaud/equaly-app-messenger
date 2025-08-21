@@ -3,6 +3,7 @@ server:
 azure:
   communication-service:
     connection-string: ${EMAIL_SERVER}
+    email: ${EMAIL_DOMAIN}
   messenger:
     connection-string: ${MQ_SERVER}
     recovery: ${RECOVERY_QUEUE}

@@ -7,6 +7,7 @@ import com.br.equaly.messenger.application.port.out.MessengerEmailSenderPort;
 import com.br.equaly.messenger.domain.enums.MessageType;
 import com.br.equaly.messenger.domain.model.MessageNotification;
 import com.br.equaly.messenger.util.UtilTools;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -18,6 +19,9 @@ import java.util.logging.Logger;
 
 @Component
 public class MessengerEmailService implements MessengerEmailSenderPort {
+
+    @Value("${azure.communication-service.email}")
+    private String equalyEmail;
 
     private final EmailClient emailClient;
     private final TemplateEngine templateEngine;
@@ -133,7 +137,7 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
         EmailMessage emailMessage = new EmailMessage()
                 .setSubject(emailTitle)
                 .setBodyHtml(emailBody)
-                .setSenderAddress("DoNotReply@7b57c237-e913-481a-8ad1-2157ec7069e6.azurecomm.net")
+                .setSenderAddress(equalyEmail)
                 .setToRecipients(recipients);
         emailClient.beginSend(emailMessage);
 
