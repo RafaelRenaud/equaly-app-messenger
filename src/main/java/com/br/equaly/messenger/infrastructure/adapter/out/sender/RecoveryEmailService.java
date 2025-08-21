@@ -27,6 +27,9 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
     @Value("${client.reset-password.url}")
     private String resetLink;
 
+    @Value("${azure.communication-service.email}")
+    private String equalyEmail;
+
     public RecoveryEmailService(EmailClient emailClient, TemplateEngine templateEngine) {
         this.emailClient = emailClient;
         this.templateEngine = templateEngine;
@@ -55,7 +58,7 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
             EmailMessage emailMessage = new EmailMessage()
                     .setSubject("eQualy - Solicitação de Alteração de Senha")
                     .setBodyHtml(emailBody)
-                    .setSenderAddress("DoNotReply@7b57c237-e913-481a-8ad1-2157ec7069e6.azurecomm.net")
+                    .setSenderAddress(equalyEmail)
                     .setToRecipients(new EmailAddress(recoveryToken.getEmail()));
             emailClient.beginSend(emailMessage);
         }else if(recoveryToken.getRecoveryTokenType().equals(RecoveryTokenType.ACCOUNT_RECOVERY)){
@@ -63,7 +66,7 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
             EmailMessage emailMessage = new EmailMessage()
                     .setSubject("eQualy - Senha Alterada")
                     .setBodyHtml(emailBody)
-                    .setSenderAddress("DoNotReply@7b57c237-e913-481a-8ad1-2157ec7069e6.azurecomm.net")
+                    .setSenderAddress(equalyEmail)
                     .setToRecipients(new EmailAddress(recoveryToken.getEmail()));
             emailClient.beginSend(emailMessage);
         }
