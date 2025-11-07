@@ -11,7 +11,7 @@ azure:
 
 client:
   reset-password:
-    url: ${RESET_PASSWORD_URL:http://localhost:4200}
+    url: ${RESET_PASSWORD_URL}
 
 logging:
   level:

@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.br.equaly.messenger</groupId>
-	<artifactId>messenger</artifactId>
-	<version>1.0.8</version>
+	<artifactId>equaly-app-messenger</artifactId>
+	<version>1.0.10</version>
 	<name>equaly-app-messenger</name>
 	<description>eQualy Email Communication Service</description>
 	<properties>
