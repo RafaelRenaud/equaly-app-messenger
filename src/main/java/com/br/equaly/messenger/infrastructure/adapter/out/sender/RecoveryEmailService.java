@@ -52,9 +52,9 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
             context.setVariable("resetLink",
                     resetLink.concat("/recovery?token=")
                             .concat(recoveryToken.getId())
-            .concat("&email=")
-            .concat(URLEncoder.encode(recoveryToken.getEmail(), StandardCharsets.UTF_8)));
-            emailBody = templateEngine.process("recovery_template", context);
+                            .concat("&email=")
+                            .concat(URLEncoder.encode(recoveryToken.getEmail(), StandardCharsets.UTF_8)));
+            emailBody = templateEngine.process("recovery/recovery_template", context);
             EmailMessage emailMessage = new EmailMessage()
                     .setSubject("eQualy - Solicitação de Alteração de Senha")
                     .setBodyHtml(emailBody)
@@ -62,7 +62,7 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
                     .setToRecipients(new EmailAddress(recoveryToken.getEmail()));
             emailClient.beginSend(emailMessage);
         }else if(recoveryToken.getRecoveryTokenType().equals(RecoveryTokenType.ACCOUNT_RECOVERY)){
-            emailBody = templateEngine.process("account_recovery_template", context);
+            emailBody = templateEngine.process("recovery/account_recovery_template", context);
             EmailMessage emailMessage = new EmailMessage()
                     .setSubject("eQualy - Senha Alterada")
                     .setBodyHtml(emailBody)

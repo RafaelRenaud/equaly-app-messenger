@@ -7,19 +7,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AzureRecoveryQueueConfig {
+public class AdmMessengerQueueConfig {
 
     @Value("${azure.messenger.connection-string}")
     private String connectionString;
 
-    @Value("${azure.messenger.recovery.queue}")
-    private String recoveryQueue;
+    @Value("${azure.messenger.admin-notification.queue}")
+    private String admNotificationQueue;
 
     @Bean
-    public QueueClient recoveryQueueClient() {
+    public QueueClient admMessengerQueueClient() {
         return new QueueClientBuilder()
                 .connectionString(connectionString)
-                .queueName(recoveryQueue)
+                .queueName(admNotificationQueue)
                 .buildClient();
     }
 }

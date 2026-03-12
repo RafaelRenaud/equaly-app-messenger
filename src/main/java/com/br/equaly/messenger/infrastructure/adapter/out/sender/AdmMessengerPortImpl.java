@@ -3,8 +3,8 @@ package com.br.equaly.messenger.infrastructure.adapter.out.sender;
 import com.azure.communication.email.EmailClient;
 import com.azure.communication.email.models.EmailAddress;
 import com.azure.communication.email.models.EmailMessage;
-import com.br.equaly.messenger.application.port.out.MessengerEmailSenderPort;
-import com.br.equaly.messenger.domain.enums.MessageType;
+import com.br.equaly.messenger.application.port.out.AdmMessengerPort;
+import com.br.equaly.messenger.domain.enums.AdmMessageType;
 import com.br.equaly.messenger.domain.model.MessageNotification;
 import com.br.equaly.messenger.util.UtilTools;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,16 +18,16 @@ import java.util.logging.Logger;
 
 
 @Component
-public class MessengerEmailService implements MessengerEmailSenderPort {
+public class AdmMessengerPortImpl implements AdmMessengerPort {
 
     @Value("${azure.communication-service.email}")
     private String equalyEmail;
 
     private final EmailClient emailClient;
     private final TemplateEngine templateEngine;
-    private static final Logger LOGGER = Logger.getLogger(MessengerEmailService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AdmMessengerPortImpl.class.getName());
 
-    public MessengerEmailService(EmailClient emailClient, TemplateEngine templateEngine) {
+    public AdmMessengerPortImpl(EmailClient emailClient, TemplateEngine templateEngine) {
         this.emailClient = emailClient;
         this.templateEngine = templateEngine;
     }
@@ -45,17 +45,17 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
         context.setVariable("actionAt", UtilTools.formatTimestamp(messageNotification.actionAt()));
         context.setVariable("actionBy", messageNotification.actionBy());
 
-        if(messageNotification.messageType().equals(MessageType.COMPANY_CREATION) || messageNotification.messageType().equals(MessageType.COMPANY_UPDATE)){
+        if(messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREATION) || messageNotification.admMessageType().equals(AdmMessageType.COMPANY_UPDATE)){
             context.setVariable("companyAlias", messageNotification.companyAlias());
             context.setVariable("companyDocument", UtilTools.formatCnpj(messageNotification.companyDocument()));
             context.setVariable("companyContact", messageNotification.companyContact());
 
-            if(messageNotification.messageType().equals(MessageType.COMPANY_CREATION)){
-                emailBody = templateEngine.process("company_creation_template", context);
+            if(messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREATION)){
+                emailBody = templateEngine.process("adm/company_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Empresa Efetuado";
             }else{
                 context.setVariable("companyStatus", (messageNotification.data().get("companyStatus").equals("ACTIVE")? "Ativo" : "Inativo"));
-                emailBody = templateEngine.process("company_update_template", context);
+                emailBody = templateEngine.process("adm/company_update_template", context);
                 emailTitle = "eQualy - Atualização de Empresa Efetuada";
             }
 
@@ -65,18 +65,18 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
             ));
         }
 
-        if(messageNotification.messageType().equals(MessageType.COMPANY_CREDENTIAL_CREATION) || messageNotification.messageType().equals(MessageType.COMPANY_CREDENTIAL_INACTIVATION)){
+        if(messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREDENTIAL_CREATION) || messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREDENTIAL_INACTIVATION)){
             context.setVariable("companyAlias", messageNotification.companyAlias());
             context.setVariable("companyDocument", UtilTools.formatCnpj(messageNotification.companyDocument()));
             context.setVariable("companyContact", messageNotification.companyContact());
             context.setVariable("credentialType", (messageNotification.data().get("credentialType").equals("ADMINISTRATIVE") ? "Administrativa" : "Operacional"));
             context.setVariable("credentialValue", messageNotification.data().get("credentialValue"));
 
-            if(messageNotification.messageType().equals(MessageType.COMPANY_CREDENTIAL_CREATION)){
-                emailBody = templateEngine.process("credential_creation_template", context);
+            if(messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREDENTIAL_CREATION)){
+                emailBody = templateEngine.process("adm/credential_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Credencial Efetuada";
             }else{
-                emailBody = templateEngine.process("credential_inactivation_template", context);
+                emailBody = templateEngine.process("adm/credential_inactivation_template", context);
                 emailTitle = "eQualy - Inativação de Credencial Efetuada";
             }
 
@@ -86,16 +86,16 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
             ));
         }
 
-        if(messageNotification.messageType().equals(MessageType.DEPARTMENT_CREATION) || messageNotification.messageType().equals(MessageType.DEPARTMENT_UPDATE)){
+        if(messageNotification.admMessageType().equals(AdmMessageType.DEPARTMENT_CREATION) || messageNotification.admMessageType().equals(AdmMessageType.DEPARTMENT_UPDATE)){
             context.setVariable("departmentName", messageNotification.data().get("departmentName"));
             context.setVariable("departmentDescription", messageNotification.data().get("departmentDescription"));
 
-            if(messageNotification.messageType().equals(MessageType.DEPARTMENT_CREATION)){
-                emailBody = templateEngine.process("department_creation_template", context);
+            if(messageNotification.admMessageType().equals(AdmMessageType.DEPARTMENT_CREATION)){
+                emailBody = templateEngine.process("adm/department_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Departamento Efetuado";
             }else{
                 context.setVariable("departmentStatus", (messageNotification.data().get("departmentStatus").equals("ACTIVE")? "Ativo" : "Inativo"));
-                emailBody = templateEngine.process("department_update_template", context);
+                emailBody = templateEngine.process("adm/department_update_template", context);
                 emailTitle = "eQualy - Atualização de Departamento Efetuado";
             }
 
@@ -112,7 +112,7 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
 
         }
 
-        if(messageNotification.messageType().equals(MessageType.USER_CREATION) || messageNotification.messageType().equals(MessageType.USER_UPDATE)){
+        if(messageNotification.admMessageType().equals(AdmMessageType.USER_CREATION) || messageNotification.admMessageType().equals(AdmMessageType.USER_UPDATE)){
             context.setVariable("universalUsername", messageNotification.data().get("universalUsername"));
             context.setVariable("departmentName", messageNotification.data().get("departmentName"));
             context.setVariable("username", messageNotification.data().get("username"));
@@ -120,12 +120,12 @@ public class MessengerEmailService implements MessengerEmailSenderPort {
             context.setVariable("email", messageNotification.data().get("email"));
             context.setVariable("documentNumber", messageNotification.data().get("documentNumber"));
 
-            if(messageNotification.messageType().equals(MessageType.USER_CREATION)){
-                emailBody = templateEngine.process("user_creation_template", context);
+            if(messageNotification.admMessageType().equals(AdmMessageType.USER_CREATION)){
+                emailBody = templateEngine.process("adm/user_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Usuário";
             }else{
                 context.setVariable("status", (messageNotification.data().get("status").equals("ACTIVE")? "Ativo" : "Inativo"));
-                emailBody = templateEngine.process("user_update_template", context);
+                emailBody = templateEngine.process("adm/user_update_template", context);
                 emailTitle = "eQualy - Atualização de Usuário";
             }
 

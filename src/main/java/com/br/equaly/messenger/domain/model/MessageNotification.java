@@ -1,6 +1,6 @@
 package com.br.equaly.messenger.domain.model;
 
-import com.br.equaly.messenger.domain.enums.MessageType;
+import com.br.equaly.messenger.domain.enums.AdmMessageType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -11,7 +11,7 @@ public record MessageNotification(
         String id,
 
         @JsonProperty("messageType")
-        MessageType messageType,
+        AdmMessageType admMessageType,
 
         @JsonProperty("data")
         Map<String, String> data,

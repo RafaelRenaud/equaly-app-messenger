@@ -7,19 +7,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AzureMessengerQueueConfig {
+public class CoreMessengerQueueConfig {
 
     @Value("${azure.messenger.connection-string}")
     private String connectionString;
 
-    @Value("${azure.messenger.notification}")
-    private String recoveryQueue;
+    @Value("${azure.messenger.core-notification.queue}")
+    private String coreNotificationQueue;
 
     @Bean
-    public QueueClient messengerQueueClient() {
+    public QueueClient coreMessengerQueueClient() {
         return new QueueClientBuilder()
                 .connectionString(connectionString)
-                .queueName(recoveryQueue)
+                .queueName(coreNotificationQueue)
                 .buildClient();
     }
 }

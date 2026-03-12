@@ -6,8 +6,12 @@ azure:
     email: ${EMAIL_DOMAIN}
   messenger:
     connection-string: ${MQ_SERVER}
-    recovery: ${RECOVERY_QUEUE}
-    notification: ${ADMIN_NOTIFICATION_QUEUE}
+    recovery:
+      queue: ${RECOVERY_QUEUE}
+    admin-notification:
+      queue: ${ADMIN_NOTIFICATION_QUEUE}
+    core-notification:
+      queue: ${CORE_NOTIFICATION_QUEUE}
 
 client:
   reset-password:
