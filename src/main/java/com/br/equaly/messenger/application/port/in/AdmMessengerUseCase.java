@@ -1,7 +1,7 @@
 package com.br.equaly.messenger.application.port.in;
 
-import com.br.equaly.messenger.domain.model.MessageNotification;
+import com.br.equaly.messenger.domain.model.AdmMessageNotification;
 
 public interface AdmMessengerUseCase {
-    void sendMessage(MessageNotification messageNotification);
+    void sendMessage(AdmMessageNotification messageNotification);
 }

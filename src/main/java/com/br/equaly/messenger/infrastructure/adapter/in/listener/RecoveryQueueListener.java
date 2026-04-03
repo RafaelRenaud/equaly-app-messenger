@@ -42,7 +42,7 @@ public class RecoveryQueueListener {
 
             for (QueueMessageItem message : messages) {
                 try {
-                    RecoveryToken recoveryToken = new ObjectMapper().readValue(new String(
+                    RecoveryToken recoveryToken = objectMapper.readValue(new String(
                             Base64.getDecoder().decode(message.getBody().toString()),
                             StandardCharsets.UTF_8
                     ), RecoveryToken.class);

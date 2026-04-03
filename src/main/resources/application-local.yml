@@ -1,5 +1,8 @@
 server:
   port: ${SERVER_PORT:8080}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
 azure:
   communication-service:
     connection-string: ${EMAIL_SERVER}
@@ -8,12 +11,14 @@ azure:
     connection-string: ${MQ_SERVER}
     recovery:
       queue: ${RECOVERY_QUEUE}
-    notification:
+    admin-notification:
       queue: ${ADMIN_NOTIFICATION_QUEUE}
+    core-notification:
+      queue: ${CORE_NOTIFICATION_QUEUE}
 
 client:
-  reset-password:
-    url: ${RESET_PASSWORD_URL:http://localhost:4200}
+  equaly:
+    url: ${EQUALY_URL:http://localhost:4200}
 
 logging:
   level:

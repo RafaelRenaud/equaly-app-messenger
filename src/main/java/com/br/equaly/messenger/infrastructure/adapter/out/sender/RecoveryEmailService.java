@@ -24,7 +24,7 @@ public class RecoveryEmailService implements RecoveryEmailSenderPort {
     private final TemplateEngine templateEngine;
     private static final Logger LOGGER = Logger.getLogger(RecoveryEmailService.class.getName());
 
-    @Value("${client.reset-password.url}")
+    @Value("${client.equaly.url}")
     private String resetLink;
 
     @Value("${azure.communication-service.email}")

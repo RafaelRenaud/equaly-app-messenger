@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Map;
 
-public record MessageNotification(
+public record AdmMessageNotification(
         @JsonProperty("id")
         String id,
 

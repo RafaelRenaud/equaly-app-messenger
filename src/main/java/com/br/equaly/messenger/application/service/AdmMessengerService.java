@@ -2,7 +2,7 @@ package com.br.equaly.messenger.application.service;
 
 import com.br.equaly.messenger.application.port.in.AdmMessengerUseCase;
 import com.br.equaly.messenger.application.port.out.AdmMessengerPort;
-import com.br.equaly.messenger.domain.model.MessageNotification;
+import com.br.equaly.messenger.domain.model.AdmMessageNotification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class AdmMessengerService implements AdmMessengerUseCase {
     }
 
     @Override
-    public void sendMessage(MessageNotification messageNotification) {
+    public void sendMessage(AdmMessageNotification messageNotification) {
         admMessengerPort.sendMessage(messageNotification);
     }
 }

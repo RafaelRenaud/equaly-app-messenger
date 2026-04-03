@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ocorrência Aguardando Edição</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F4F4F4;
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .email-container {
+            width: 100%;
+            padding: 20px;
+            background-color: #F4F4F4;
+        }
+
+        .email-content {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .email-header {
+            background-color: #203340;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .email-header img {
+            width: 150px;
+            filter: drop-shadow(0 0 3px #000);
+        }
+
+        .email-body {
+            padding: 20px;
+            color: #4A4A4A;
+        }
+
+        .email-body h3 {
+            margin-top: 0;
+        }
+
+        .email-body p {
+            line-height: 1.5;
+            margin: 8px 0;
+        }
+
+        .button-wrapper {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .button-wrapper a {
+            background-color: #203340;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-body {
+                padding: 15px;
+                font-size: 15px;
+            }
+
+            .button-wrapper a {
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<table class="email-container" role="presentation">
+    <tr>
+        <td>
+            <table class="email-content" role="presentation">
+                <!-- Header -->
+                <tr>
+                    <td class="email-header">
+                        <img src="https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png" alt="Logo da Empresa"/>
+                    </td>
+                </tr>
+
+                <!-- Content -->
+                <tr>
+                    <td class="email-body">
+                        <h3>SOLICITAÇÃO DE EDIÇÃO DE OCORRÊNCIA</h3>
+                        <p>Uma ocorrência aguarda a sua aprovação para edição no sistema eQualy para a empresa <span th:text="${companyName}"></span> às <span th:text="${createdAt}"></span> aberta pelo usuário <span th:text="${createdBy}"></span></p>
+                        <p>Este e-mail foi enviado ao inspetor de qualidade responsável pela aprovação de edição da ocorrência. Se houver alguma inconsistência de informações ou pedido do usuário de abertura, avalie a aprovação da mesma.</p>
+
+                        <br>
+
+                        <p th:if="${editRequestId != '0'}"><strong>ID da Solicitação:</strong> <i><span th:text="${editRequestId}"></span></i></p>
+                        <p><strong>Justificativa para Edição:</strong> <i><span th:text="${editRequestJustification}"></span></i></p>
+
+                        <br>
+                        <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
+                        <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
+                        <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
+                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <br>
+                    </td>
+                </tr>
+
+                <!-- Button -->
+                <tr>
+                    <td class="button-wrapper">
+                        <a th:href="${redirectUrl}">
+                            Leve-me até o Registro
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
