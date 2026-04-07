@@ -103,14 +103,27 @@
                 <tr>
                     <td class="email-body">
                         <h3>CADASTRO DE OCORRÊNCIA</h3>
-                        <p>Uma ocorrência foi formalizada no sistema eQualy para a empresa <span th:text="${companyName}"></span> às <span th:text="${createdAt}"></span> pelo usuário <span th:text="${createdBy}"></span></p>
-                        <p>Este e-mail foi enviado ao formalizador responsável pela abertura da ocorrência. Se houver alguma inconsistência de informações, solicite retorno para edição internamente no sistema ou entre em contato com o suporte.</p>
+
+                        <p>
+                            Uma ocorrência foi registrada no sistema eQualy para a empresa
+                            <span th:text="${companyName}"></span>,
+                            às <span th:text="${createdAt}"></span>,
+                            pelo usuário <span th:text="${createdBy}"></span>.
+                        </p>
+
+                        <p>
+                            Este e-mail foi enviado ao responsável pela abertura da ocorrência.
+                            Caso identifique alguma inconsistência nas informações, solicite a correção diretamente no sistema
+                            ou entre em contato com o suporte.
+                        </p>
 
                         <br>
+
                         <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
                         <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
                         <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
-                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+
                         <br>
                     </td>
                 </tr>

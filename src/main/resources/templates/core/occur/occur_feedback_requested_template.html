@@ -33,7 +33,6 @@
         }
 
         .email-header {
-            background-color: #203340;
             padding: 15px;
             text-align: center;
         }
@@ -95,23 +94,34 @@
                 <!-- Header -->
                 <tr>
                     <td class="email-header">
-                        <img src="https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png" alt="Logo da Empresa"/>
+                        <img th:src="${logoUrl}" alt="Logo da Empresa"/>
                     </td>
                 </tr>
 
                 <!-- Content -->
                 <tr>
                     <td class="email-body">
-                        <h3>Olá <span th:text="complainantName"></span>,</h3>
-                        <p>A empresa <span th:text="${companyName}"></span> registrou uma ocorrência de qualidade às <span th:text="${createdAt}"></span> pelo(a) funcionário(a) <span th:text="${createdBy}"></span> e atrelou a reclamação ao seu nome e contato.</p>
-                        <p>Atualmente a ocorrência foi encerrada no nosso sistema. Pedimos por gentileza que avalie as informações de fechamento e atribua uma nota para podermos melhorar os nossos processo e monitorar melhor as nossas atividades :)</p>
+                        <h3>Olá, <span th:text="${complainantName}"></span>,</h3>
+
+                        <p>
+                            A empresa <span th:text="${companyName}"></span> registrou uma ocorrência de qualidade às
+                            <span th:text="${createdAt}"></span>, pelo(a) funcionário(a)
+                            <span th:text="${createdBy}"></span>, vinculando a reclamação ao seu nome e contato.
+                        </p>
+
+                        <p>
+                            A ocorrência foi encerrada em nosso sistema.
+                            Pedimos, por gentileza, que avalie as informações de fechamento e atribua uma nota.
+                            Sua avaliação é muito importante para aprimorarmos nossos processos e monitorarmos melhor nossas atividades.
+                        </p>
 
                         <br>
+
                         <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
                         <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
                         <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
-                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
-                        <p><strong>Informações de Fechamento:</strong> <i><span th:text="${closeReason}"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Informações de fechamento:</strong> <i><span th:text="${closeReason}"></span></i></p>
 
                         <br>
                     </td>

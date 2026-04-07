@@ -102,15 +102,27 @@
                 <!-- Content -->
                 <tr>
                     <td class="email-body">
-                        <h3>OCORRÊNCIA PENDENTE INSPEÇÃO</h3>
-                        <p>Uma ocorrência aguarda a sua inspeção de qualidade no sistema eQualy para a empresa <span th:text="${companyName}"></span> às <span th:text="${createdAt}"></span> aberta pelo usuário <span th:text="${createdBy}"></span></p>
-                        <p>Este e-mail foi enviado ao inspetor de qualidade responsável pela avaliação da ocorrência. Se houver alguma inconsistência de informações, reprove a ocorrência ou solicite retorno para edição internamente no sistema.</p>
+                        <h3>OCORRÊNCIA PENDENTE DE INSPEÇÃO</h3>
+
+                        <p>
+                            Uma ocorrência aguarda sua inspeção de qualidade no sistema eQualy para a empresa
+                            <span th:text="${companyName}"></span>,
+                            às <span th:text="${createdAt}"></span>,
+                            aberta pelo usuário <span th:text="${createdBy}"></span>.
+                        </p>
+
+                        <p>
+                            Este e-mail foi enviado ao inspetor de qualidade responsável pela avaliação da ocorrência.
+                            Caso identifique alguma inconsistência nas informações, reprove a ocorrência ou solicite a correção diretamente no sistema.
+                        </p>
 
                         <br>
+
                         <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
                         <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
                         <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
-                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+
                         <br>
                     </td>
                 </tr>

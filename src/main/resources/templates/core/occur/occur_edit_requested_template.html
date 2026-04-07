@@ -103,19 +103,32 @@
                 <tr>
                     <td class="email-body">
                         <h3>SOLICITAÇÃO DE EDIÇÃO DE OCORRÊNCIA</h3>
-                        <p>Uma ocorrência aguarda a sua aprovação para edição no sistema eQualy para a empresa <span th:text="${companyName}"></span> às <span th:text="${createdAt}"></span> aberta pelo usuário <span th:text="${createdBy}"></span></p>
-                        <p>Este e-mail foi enviado ao inspetor de qualidade responsável pela aprovação de edição da ocorrência. Se houver alguma inconsistência de informações ou pedido do usuário de abertura, avalie a aprovação da mesma.</p>
+
+                        <p>
+                            Uma ocorrência aguarda sua aprovação para edição no sistema eQualy para a empresa
+                            <span th:text="${companyName}"></span>,
+                            às <span th:text="${createdAt}"></span>,
+                            aberta pelo usuário <span th:text="${createdBy}"></span>.
+                        </p>
+
+                        <p>
+                            Este e-mail foi enviado ao inspetor de qualidade responsável pela aprovação da edição da ocorrência.
+                            Caso identifique alguma inconsistência nas informações ou na solicitação realizada pelo usuário,
+                            avalie a aprovação da mesma.
+                        </p>
 
                         <br>
 
                         <p th:if="${editRequestId != '0'}"><strong>ID da Solicitação:</strong> <i><span th:text="${editRequestId}"></span></i></p>
-                        <p><strong>Justificativa para Edição:</strong> <i><span th:text="${editRequestJustification}"></span></i></p>
+                        <p><strong>Justificativa para edição:</strong> <i><span th:text="${editRequestJustification}"></span></i></p>
 
                         <br>
+
                         <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
                         <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
                         <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
-                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+
                         <br>
                     </td>
                 </tr>

@@ -25,6 +25,7 @@ public class MessengerQueueListener {
     private final QueueClient admMessengerQueueClient;
     private final QueueClient coreMessengerQueueClient;
     private final ObjectMapper objectMapper;
+
     private static final Logger LOGGER = Logger.getLogger(MessengerQueueListener.class.getName());
 
     public MessengerQueueListener(AdmMessengerUseCase admMessengerUseCase,
@@ -32,68 +33,67 @@ public class MessengerQueueListener {
                                   QueueClient admMessengerQueueClient,
                                   QueueClient coreMessengerQueueClient,
                                   ObjectMapper objectMapper) {
+        this.admMessengerUseCase = admMessengerUseCase;
+        this.coreMessengerUseCase = coreMessengerUseCase;
         this.admMessengerQueueClient = admMessengerQueueClient;
         this.coreMessengerQueueClient = coreMessengerQueueClient;
         this.objectMapper = objectMapper;
-        this.admMessengerUseCase = admMessengerUseCase;
-        this.coreMessengerUseCase = coreMessengerUseCase;
     }
 
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(cron = "*/15 * * * * *")
     public void sendAdmNotification() {
+        processMessages(
+                admMessengerQueueClient,
+                AdmMessageNotification.class,
+                admMessengerUseCase::sendMessage
+        );
+    }
+
+    @Scheduled(cron = "*/15 * * * * *")
+    public void sendCoreNotification() {
+        processMessages(
+                coreMessengerQueueClient,
+                CoreMessageNotification.class,
+                coreMessengerUseCase::sendMessage
+        );
+    }
+
+    private <T> void processMessages(QueueClient queueClient, Class<T> clazz, java.util.function.Consumer<T> consumer) {
         try {
-            List<QueueMessageItem> messages = admMessengerQueueClient
+            List<QueueMessageItem> messages = queueClient
                     .receiveMessages(10, Duration.ofSeconds(30), Duration.ofSeconds(5), Context.NONE)
-                    .stream().toList();
+                    .stream()
+                    .toList();
 
             if (messages.isEmpty()) {
                 return;
             }
 
-            for (QueueMessageItem message : messages) {
+            messages.stream().forEach(message -> {
                 try {
-                    AdmMessageNotification messageNotification = objectMapper.readValue(new String(
-                            Base64.getDecoder().decode(message.getBody().toString()),
-                            StandardCharsets.UTF_8
-                    ), AdmMessageNotification.class);
-                    LOGGER.info("******** NOTIFICATION RECEIVED: " + messageNotification.toString() + " ********");
-                    admMessengerUseCase.sendMessage(messageNotification);
-                    admMessengerQueueClient.deleteMessage(message.getMessageId(), message.getPopReceipt());
+                    T payload = deserializeMessage(message, clazz);
+
+                    LOGGER.info("******** NOTIFICATION RECEIVED: " + payload + " ********");
+
+                    consumer.accept(payload);
+
+                    queueClient.deleteMessage(message.getMessageId(), message.getPopReceipt());
+
                 } catch (Exception ex) {
                     LOGGER.severe("Erro ao processar mensagem: " + ex.getMessage());
                 }
-            }
+            });
+
         } catch (Exception ex) {
             LOGGER.severe("Erro ao ler da fila: " + ex.getMessage());
         }
     }
 
-    @Scheduled(fixedDelay = 15000)
-    public void sendCoreNotification() {
-        try {
-            List<QueueMessageItem> messages = coreMessengerQueueClient
-                    .receiveMessages(10, Duration.ofSeconds(30), Duration.ofSeconds(5), Context.NONE)
-                    .stream().toList();
-
-            if (messages.isEmpty()) {
-                return;
-            }
-
-            for (QueueMessageItem message : messages) {
-                try {
-                    CoreMessageNotification messageNotification = objectMapper.readValue(new String(
-                            Base64.getDecoder().decode(message.getBody().toString()),
-                            StandardCharsets.UTF_8
-                    ), CoreMessageNotification.class);
-                    LOGGER.info("******** NOTIFICATION RECEIVED: " + messageNotification.toString() + " ********");
-                    coreMessengerUseCase.sendMessage(messageNotification);
-                    coreMessengerQueueClient.deleteMessage(message.getMessageId(), message.getPopReceipt());
-                } catch (Exception ex) {
-                    LOGGER.severe("Erro ao processar mensagem: " + ex.getMessage());
-                }
-            }
-        } catch (Exception ex) {
-            LOGGER.severe("Erro ao ler da fila: " + ex.getMessage());
-        }
+    private <T> T deserializeMessage(QueueMessageItem message, Class<T> clazz) throws Exception {
+        String decoded = new String(
+                Base64.getDecoder().decode(message.getBody().toString()),
+                StandardCharsets.UTF_8
+        );
+        return objectMapper.readValue(decoded, clazz);
     }
 }

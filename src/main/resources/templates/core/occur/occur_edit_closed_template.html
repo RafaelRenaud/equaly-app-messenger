@@ -103,26 +103,35 @@
                 <tr>
                     <td class="email-body">
                         <h3>SOLICITAÇÃO DE EDIÇÃO DE OCORRÊNCIA FINALIZADA</h3>
+
                         <p>
-                            Uma ocorrência teve solicitação de edição finalizada no sistema eQualy para a empresa
-                            <span th:text="${companyName}"></span> às
-                            <span th:text="${createdAt}"></span> e
+                            Uma solicitação de edição de ocorrência foi finalizada no sistema eQualy para a empresa
+                            <span th:text="${companyName}"></span>,
+                            às <span th:text="${createdAt}"></span>,
+                            sendo
                             <span th:text="${actionType == 'APPROVE'} ? 'aprovada' : 'rejeitada'"></span>
                             pelo usuário <span th:text="${createdBy}"></span>.
                         </p>
-                        <p>Este e-mail foi enviado ao solicitante de edição ocorrência. Se houver alguma inconsistência de informações ou necessidade de edição, entre em contato direto com o avaliador de qualidade atrelado a ocorrência.</p>
+
+                        <p>
+                            Este e-mail foi enviado ao solicitante da edição da ocorrência.
+                            Caso identifique alguma inconsistência nas informações ou necessidade de nova edição,
+                            entre em contato diretamente com o avaliador de qualidade responsável pela ocorrência.
+                        </p>
 
                         <br>
 
                         <p th:if="${editRequestId != '0'}"><strong>ID da Solicitação:</strong> <i><span th:text="${editRequestId}"></span></i></p>
-                        <p><strong>Justificativa para Edição:</strong> <i><span th:text="${editRequestJustification}"></span></i></p>
-                        <p><strong>Status da Solicitação:</strong> <i><span th:text="${actionType == 'APPROVE'} ? 'APROVADA' : 'REJEITADA'"></span></i></p>
+                        <p><strong>Justificativa para edição:</strong> <i><span th:text="${editRequestJustification}"></span></i></p>
+                        <p><strong>Status da solicitação:</strong> <i><span th:text="${actionType == 'APPROVE'} ? 'APROVADA' : 'REJEITADA'"></span></i></p>
 
                         <br>
+
                         <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
                         <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
                         <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
-                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+
                         <br>
                     </td>
                 </tr>

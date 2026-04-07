@@ -83,6 +83,25 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
 
+		<!-- MongoDB Dependency -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+
+		<!-- MapStruct Dependency -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.6.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

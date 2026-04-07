@@ -1,3 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+      database: equaly
+      auto-index-creation: true
 server:
   port: ${SERVER_PORT:8080}
   jackson:
@@ -15,6 +21,10 @@ azure:
       queue: ${ADMIN_NOTIFICATION_QUEUE}
     core-notification:
       queue: ${CORE_NOTIFICATION_QUEUE}
+  app:
+    connection-string: ${APP_MQ_SERVER}
+    audit:
+      queue: ${AUDIT_QUEUE}
 
 client:
   equaly:

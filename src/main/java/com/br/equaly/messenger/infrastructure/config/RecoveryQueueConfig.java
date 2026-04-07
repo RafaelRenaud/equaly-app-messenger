@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AzureRecoveryQueueConfig {
+public class RecoveryQueueConfig {
 
     @Value("${azure.messenger.connection-string}")
     private String connectionString;

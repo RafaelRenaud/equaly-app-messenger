@@ -33,7 +33,6 @@
         }
 
         .email-header {
-            background-color: #203340;
             padding: 15px;
             text-align: center;
         }
@@ -95,22 +94,36 @@
                 <!-- Header -->
                 <tr>
                     <td class="email-header">
-                        <img src="https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png" alt="Logo da Empresa"/>
+                        <img th:src="${logoUrl}" alt="Logo da Empresa"/>
                     </td>
                 </tr>
 
                 <!-- Content -->
                 <tr>
                     <td class="email-body">
-                        <h3>Olá <span th:text="${complainantName}"></span></h3>
-                        <p>Uma reclamação foi aberta em seu nome a empresa <span th:text="${companyName}"></span> às <span th:text="${createdAt}"></span> pelo usuário <span th:text="${createdBy}"></span></p>
-                        <p>Nossa equipe de atendimento ao cliente e gestão de qualidade estão a analisar o seu caso e em breve retornaremos uma resposta a ele. Pedimos para que entre em contato com nosso SAC caso precise de informações adicionais referente a oicorrência abaixo:</p>
+                        <h3>Olá, <span th:text="${complainantName}"></span></h3>
+
+                        <p>
+                            Uma reclamação foi registrada em seu nome para a empresa
+                            <span th:text="${companyName}"></span>,
+                            às <span th:text="${createdAt}"></span>,
+                            pelo usuário <span th:text="${createdBy}"></span>.
+                        </p>
+
+                        <p>
+                            Nossa equipe de atendimento ao cliente e gestão da qualidade está analisando o seu caso
+                            e em breve retornará com uma resposta.
+                            Caso precise de informações adicionais, entre em contato com o nosso SAC,
+                            informando os dados da ocorrência abaixo:
+                        </p>
 
                         <br>
+
                         <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
                         <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
                         <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
-                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+
                         <br>
                     </td>
                 </tr>

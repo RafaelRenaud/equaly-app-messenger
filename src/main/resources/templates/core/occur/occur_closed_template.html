@@ -102,27 +102,49 @@
                 <!-- Content -->
                 <tr>
                     <td class="email-body">
-                        <h3><span th:if="closeStatus == 'CLOSED_WITH_RATING' ? 'FEEDBACK DE OCORRÊNCIA FINALIZADO' : 'OCORRÊNCIA FINALIZADA'"></span></h3>
-                        <p>Uma ocorrência foi encerrada no sistema eQualy para a empresa <span th:text="${companyName}"></span> às <span th:text="${createdAt}"></span> pelo usuário <span th:text="${createdBy}"></span></p>
-                        <p th:if="closeStatus == ''">Esse registro se encontra pendente de avaliação do cliente para o arquivamento, ou o mesmo será após 30 dias de inatividade.</p>
+                        <h3><span th:text="${closeStatus == 'CLOSED_WITH_RATING'} ? 'FEEDBACK DE OCORRÊNCIA FINALIZADO' : 'OCORRÊNCIA FINALIZADA'"></span></h3>
+
+                        <p>
+                            Uma ocorrência foi encerrada no sistema eQualy para a empresa
+                            <span th:text="${companyName}"></span>,
+                            às <span th:text="${createdAt}"></span>,
+                            pelo usuário <span th:text="${createdBy}"></span>.
+                        </p>
+
+                        <p th:if="${closeStatus == 'NOT_INFORMED'}">
+                            Este registro encontra-se pendente de avaliação do cliente para arquivamento,
+                            ou será arquivado automaticamente após 30 dias de inatividade.
+                        </p>
 
                         <br>
+
                         <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
                         <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
                         <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
-                        <p><strong>Data do Ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
-                        <p><strong>Informações de Fechamento:</strong> <i><span th:text="${closeReason}"></span></i></p>
-                        <p><strong>Não-Conformidade Gerada:</strong> <i><span th:if="${hasRNCOpened ? 'SIM' : 'NÃO'}"></span></i></p>
-                        <p th:if="closeStatus != ''"><strong>Status de Fechamento:</strong> <i><span th:if="closeStatus == 'CLOSED_WITH_RATING' ? 'Encerrado com Feedback' : 'Encerrado sem Feedback'"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Informações de fechamento:</strong> <i><span th:text="${closeReason}"></span></i></p>
+
+                        <p>
+                            <strong>Não conformidade gerada:</strong>
+                            <i><span th:text="${hasRNCOpened ? 'SIM' : 'NÃO'}"></span></i>
+                        </p>
+
+                        <p th:if="${closeStatus != 'NOT_INFORMED'}">
+                            <strong>Status de fechamento:</strong>
+                            <i><span th:text="${closeStatus == 'CLOSED_WITH_RATING'} ? 'Encerrado com feedback' : 'Encerrado sem feedback'"></span></i>
+                        </p>
 
                         <br>
 
-                        <div th:if="${closeStatus == ''}">
-                            <p>Para um processo mais ágil, peça para o mesmo avaliar pelo e-mail recebido após o seu encerramento.</p>
+                        <div th:if="${closeStatus == 'NOT_INFORMED'}">
+                            <p>
+                                Para agilizar o processo, solicite ao cliente que realize a avaliação por meio do e-mail enviado após o encerramento.
+                            </p>
 
                             <br>
+
                             <p><strong>Reclamante:</strong> <i><span th:text="${complainantName}"></span></i></p>
-                            <p><strong>E-Mail:</strong> <i><span th:text="${complainantEmail}"></span></i></p>
+                            <p><strong>E-mail:</strong> <i><span th:text="${complainantEmail}"></span></i></p>
                             <p><strong>Telefone:</strong> <i><span th:text="${complainantPhone}"></span></i></p>
                             <p><strong>Endereço:</strong> <i><span th:text="${complainantAddress}"></span></i></p>
 
@@ -131,13 +153,15 @@
 
                         <div th:if="${closeStatus == 'CLOSED_WITH_RATING'}">
                             <br>
+
                             <p><strong>Reclamante:</strong> <i><span th:text="${complainantName}"></span></i></p>
-                            <p><strong>E-Mail:</strong> <i><span th:text="${complainantEmail}"></span></i></p>
+                            <p><strong>E-mail:</strong> <i><span th:text="${complainantEmail}"></span></i></p>
                             <p><strong>Telefone:</strong> <i><span th:text="${complainantPhone}"></span></i></p>
                             <p><strong>Endereço:</strong> <i><span th:text="${complainantAddress}"></span></i></p>
-                            <p><strong>Feedback do Cliente:</strong> <i><span th:text="${rateComment}"></span></i></p>
-                            <p><strong>Nota Atribuída:</strong> <i><span th:text="${rateScore}"></span></i></p>
-                            <p><strong>Data de Feedback:</strong> <i><span th:text="${rateSentAt}"></span></i></p>
+                            <p><strong>Feedback do cliente:</strong> <i><span th:text="${rateComment}"></span></i></p>
+                            <p><strong>Nota atribuída:</strong> <i><span th:text="${rateScore}"></span></i></p>
+                            <p><strong>Data do feedback:</strong> <i><span th:text="${rateSentAt}"></span></i></p>
+
                             <br>
                         </div>
                     </td>
