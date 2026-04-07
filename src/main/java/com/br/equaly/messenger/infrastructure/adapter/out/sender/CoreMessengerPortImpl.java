@@ -6,6 +6,7 @@ import com.azure.communication.email.models.EmailMessage;
 import com.br.equaly.messenger.application.port.out.CoreMessengerPort;
 import com.br.equaly.messenger.domain.enums.CoreMessageType;
 import com.br.equaly.messenger.domain.model.CoreMessageNotification;
+import com.br.equaly.messenger.util.ConstantUtils;
 import com.br.equaly.messenger.util.UtilTools;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -41,7 +42,7 @@ public class CoreMessengerPortImpl implements CoreMessengerPort {
         context.setVariable("companyName", messageNotification.companyName());
         context.setVariable("createdAt", UtilTools.formatTimestamp(messageNotification.createdAt().toString()));
         context.setVariable("createdBy", messageNotification.createdBy());
-        context.setVariable("redirectUrl", messageNotification.redirectUri() != null ? "https://equaly.app".concat(messageNotification.redirectUri().toString()) : "");
+        context.setVariable("redirectUrl", messageNotification.redirectUri() != ConstantUtils.NOT_INFORMED ? "https://equaly.app".concat(messageNotification.redirectUri().toString()) : "");
 
         if(messageNotification.type().equals(CoreMessageType.OCCUR_CREATED)){
             emailBody = templateEngine.process("core/occur/occur_creation_template", context);
@@ -50,7 +51,7 @@ public class CoreMessengerPortImpl implements CoreMessengerPort {
 
         if(messageNotification.type().equals(CoreMessageType.OCCUR_CREATED_EXTERNAL)){
             context.setVariable("logoUrl",
-                    messageNotification.additionalInformation().get("companyLogo") != null ? messageNotification.additionalInformation().get("companyLogo")
+                    messageNotification.additionalInformation().get("companyLogo") != ConstantUtils.NOT_INFORMED ? messageNotification.additionalInformation().get("companyLogo")
                             : "https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png");
             emailBody = templateEngine.process("core/occur/occur_creation_ext_template", context);
             emailTitle = "Suporte - Cadastro de Reclamação [".concat(messageNotification.additionalInformation().get("occurCode").toString()).concat("]");
@@ -83,7 +84,7 @@ public class CoreMessengerPortImpl implements CoreMessengerPort {
 
         if(messageNotification.type().equals(CoreMessageType.OCCUR_FEEDBACK_REQUESTED)){
             context.setVariable("logoUrl",
-                    messageNotification.additionalInformation().get("companyLogo") != null ? messageNotification.additionalInformation().get("companyLogo")
+                    messageNotification.additionalInformation().get("companyLogo") != ConstantUtils.NOT_INFORMED ? messageNotification.additionalInformation().get("companyLogo")
                             : "https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png");
             context.setVariable("redirectUrl", "https://equaly.app/occur-rating?token=".concat(messageNotification.additionalInformation().get("feedbackToken").toString()));
             emailBody = templateEngine.process("core/occur/occur_feedback_requested_template", context);

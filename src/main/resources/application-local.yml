@@ -29,7 +29,7 @@ azure:
 
 client:
   equaly:
-    url: ${EQUALY_URL:http://localhost:4200}
+    url: ${EQUALY_URL:https://equaly.app}
 
 logging:
   level:
