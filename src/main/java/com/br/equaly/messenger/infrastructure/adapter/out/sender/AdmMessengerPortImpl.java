@@ -51,11 +51,11 @@ public class AdmMessengerPortImpl implements AdmMessengerPort {
             context.setVariable("companyContact", messageNotification.companyContact());
 
             if(messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREATION)){
-                emailBody = templateEngine.process("core/adm/company_creation_template", context);
+                emailBody = templateEngine.process("adm/company_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Empresa Efetuado";
             }else{
                 context.setVariable("companyStatus", (messageNotification.data().get("companyStatus").equals("ACTIVE")? "Ativo" : "Inativo"));
-                emailBody = templateEngine.process("core/adm/company_update_template", context);
+                emailBody = templateEngine.process("adm/company_update_template", context);
                 emailTitle = "eQualy - Atualização de Empresa Efetuada";
             }
 
@@ -73,10 +73,10 @@ public class AdmMessengerPortImpl implements AdmMessengerPort {
             context.setVariable("credentialValue", messageNotification.data().get("credentialValue"));
 
             if(messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREDENTIAL_CREATION)){
-                emailBody = templateEngine.process("core/adm/credential_creation_template", context);
+                emailBody = templateEngine.process("adm/credential_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Credencial Efetuada";
             }else{
-                emailBody = templateEngine.process("core/adm/credential_inactivation_template", context);
+                emailBody = templateEngine.process("adm/credential_inactivation_template", context);
                 emailTitle = "eQualy - Inativação de Credencial Efetuada";
             }
 
@@ -91,11 +91,11 @@ public class AdmMessengerPortImpl implements AdmMessengerPort {
             context.setVariable("departmentDescription", messageNotification.data().get("departmentDescription"));
 
             if(messageNotification.admMessageType().equals(AdmMessageType.DEPARTMENT_CREATION)){
-                emailBody = templateEngine.process("core/adm/department_creation_template", context);
+                emailBody = templateEngine.process("adm/department_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Departamento Efetuado";
             }else{
                 context.setVariable("departmentStatus", (messageNotification.data().get("departmentStatus").equals("ACTIVE")? "Ativo" : "Inativo"));
-                emailBody = templateEngine.process("core/adm/department_update_template", context);
+                emailBody = templateEngine.process("adm/department_update_template", context);
                 emailTitle = "eQualy - Atualização de Departamento Efetuado";
             }
 
@@ -121,11 +121,11 @@ public class AdmMessengerPortImpl implements AdmMessengerPort {
             context.setVariable("documentNumber", messageNotification.data().get("documentNumber"));
 
             if(messageNotification.admMessageType().equals(AdmMessageType.USER_CREATION)){
-                emailBody = templateEngine.process("core/adm/user_creation_template", context);
+                emailBody = templateEngine.process("adm/user_creation_template", context);
                 emailTitle = "eQualy - Cadastro de Usuário";
             }else{
                 context.setVariable("status", (messageNotification.data().get("status").equals("ACTIVE")? "Ativo" : "Inativo"));
-                emailBody = templateEngine.process("core/adm/user_update_template", context);
+                emailBody = templateEngine.process("adm/user_update_template", context);
                 emailTitle = "eQualy - Atualização de Usuário";
             }
 
