@@ -14,7 +14,7 @@ azure:
     connection-string: ${EMAIL_SERVER}
     email: ${EMAIL_DOMAIN}
   messenger:
-    connection-string: ${MQ_SERVER}
+    connection-string: ${MESSENGER_MQ_SERVER}
     recovery:
       queue: ${RECOVERY_QUEUE}
     admin-notification:
