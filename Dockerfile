@@ -5,10 +5,10 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copiar o arquivo JAR gerado pelo Maven/Gradle
-COPY target/equaly-app-messenger-1.0.14.jar equaly-app-messenger-1.0.14.jar
+COPY target/equaly-app-messenger-1.0.16.jar equaly-app-messenger-1.0.16.jar
 
 # Expor a porta da aplicação
 EXPOSE 8080
 
 # Comando para iniciar a aplicação
-ENTRYPOINT ["java", "-jar", "equaly-app-messenger-1.0.14.jar"]
+ENTRYPOINT ["java", "-jar", "equaly-app-messenger-1.0.16.jar"]

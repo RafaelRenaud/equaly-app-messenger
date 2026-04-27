@@ -89,7 +89,9 @@ public class CoreMessengerPortImpl implements CoreMessengerPort {
             context.setVariable("logoUrl", logoUrl);
             context.setVariable("redirectUrl", "https://equaly.app/occur-rating?token="
                     .concat(messageNotification.additionalInformation().get("feedbackToken").toString())
-                    .concat("&companyLogo=").concat(Base64.getEncoder().encodeToString(logoUrl.getBytes())));
+                    .concat("&companyLogo=").concat(Base64.getEncoder().encodeToString(logoUrl.getBytes()))
+                    .concat("&occurId=").concat(messageNotification.additionalInformation().get("occurId").toString())
+            );
             emailBody = templateEngine.process("core/occur/occur_feedback_requested_template", context);
             emailTitle = "Suporte - Avaliação de Reclamação [".concat(messageNotification.additionalInformation().get("occurCode").toString()).concat("]");
         }
