@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.Base64;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -52,7 +53,7 @@ public class CoreMessengerPortImpl implements CoreMessengerPort {
         if(messageNotification.type().equals(CoreMessageType.OCCUR_CREATED_EXTERNAL)){
             context.setVariable("logoUrl",
                     messageNotification.additionalInformation().get("companyLogo") != ConstantUtils.NOT_INFORMED ? messageNotification.additionalInformation().get("companyLogo")
-                            : "https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png");
+                            : ConstantUtils.EQUALY_LOGO);
             emailBody = templateEngine.process("core/occur/occur_creation_ext_template", context);
             emailTitle = "Suporte - Cadastro de Reclamação [".concat(messageNotification.additionalInformation().get("occurCode").toString()).concat("]");
         }
@@ -83,10 +84,12 @@ public class CoreMessengerPortImpl implements CoreMessengerPort {
         }
 
         if(messageNotification.type().equals(CoreMessageType.OCCUR_FEEDBACK_REQUESTED)){
-            context.setVariable("logoUrl",
-                    messageNotification.additionalInformation().get("companyLogo") != ConstantUtils.NOT_INFORMED ? messageNotification.additionalInformation().get("companyLogo")
-                            : "https://equalymessengerstorage.blob.core.windows.net/public-assets/logo_white.png");
-            context.setVariable("redirectUrl", "https://equaly.app/occur-rating?token=".concat(messageNotification.additionalInformation().get("feedbackToken").toString()));
+            String logoUrl = messageNotification.additionalInformation().get("companyLogo") != ConstantUtils.NOT_INFORMED ? messageNotification.additionalInformation().get("companyLogo").toString()
+                    : ConstantUtils.EQUALY_LOGO;
+            context.setVariable("logoUrl", logoUrl);
+            context.setVariable("redirectUrl", "https://equaly.app/occur-rating?token="
+                    .concat(messageNotification.additionalInformation().get("feedbackToken").toString())
+                    .concat("&companyLogo=").concat(Base64.getEncoder().encodeToString(logoUrl.getBytes())));
             emailBody = templateEngine.process("core/occur/occur_feedback_requested_template", context);
             emailTitle = "Suporte - Avaliação de Reclamação [".concat(messageNotification.additionalInformation().get("occurCode").toString()).concat("]");
         }

@@ -69,7 +69,20 @@ public class AdmMessengerPortImpl implements AdmMessengerPort {
             context.setVariable("companyAlias", messageNotification.companyAlias());
             context.setVariable("companyDocument", UtilTools.formatCnpj(messageNotification.companyDocument()));
             context.setVariable("companyContact", messageNotification.companyContact());
-            context.setVariable("credentialType", (messageNotification.data().get("credentialType").equals("ADMINISTRATIVE") ? "Administrativa" : "Operacional"));
+
+            String credentialType;
+
+            if(messageNotification.data().get("credentialType").equals("ADMINISTRATIVE")){
+                credentialType = "Administrativa";
+            }else if(messageNotification.data().get("credentialType").equals("OPERATIONAL")){
+                credentialType = "Operacional";
+            }else if(messageNotification.data().get("credentialType").equals("CHATBOT")){
+                credentialType = "Chatbot - Dalton/WhatsApp";
+            }else{
+                credentialType = messageNotification.data().get("credentialType").toString();
+            }
+
+            context.setVariable("credentialType", credentialType);
             context.setVariable("credentialValue", messageNotification.data().get("credentialValue"));
 
             if(messageNotification.admMessageType().equals(AdmMessageType.COMPANY_CREDENTIAL_CREATION)){
