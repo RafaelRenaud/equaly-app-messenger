@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Recuperação de Senha</title>
+    <title>Ocorrência com Inspeção Finalizada</title>
     <style>
         body {
             margin: 0;
@@ -102,28 +102,47 @@
                 <!-- Content -->
                 <tr>
                     <td class="email-body">
-                        <h3>Olá <span th:text="${username}"></span>,</h3>
-                        <p>Foi realizada uma solicitação de ativação ou troca de senha pelo sistema eQualy às <span th:text="${createdAt}"></span>.</p>
-                        <p>O link de alteração expirará dentro de 30 minutos após o envio deste e-mail, não o compartilhe com ninguém.</p>
-                        <p>Se não foi você quem realizou a solicitação, por favor ignore este e-mail.</p>
+                        <h3>INSPEÇÃO DE OCORRÊNCIA FINALIZADA</h3>
 
-                        <p><strong>Usuário:</strong> <i><span th:text="${companyUsername}"></span></i></p>
-                        <p><strong>Empresa:</strong> <i><span th:text="${companyDisplayName}"></span></i></p>
-                        <p><strong>Razão Social:</strong> <i><span th:text="${companyName}"></span></i></p>
-                        <p><strong>Código da Empresa:</strong> <i><span th:text="${companyAlias}"></span></i></p>
+                        <p>
+                            Uma ocorrência teve sua inspeção finalizada no sistema eQualy para a empresa
+                            <span th:text="${companyName}"></span>,
+                            às <span th:text="${createdAt}"></span>,
+                            pelo usuário <span th:text="${createdBy}"></span>.
+                        </p>
 
-                        <p>Seu código de recuperação é:</p>
-                        <h2 class="recovery-code" style="letter-spacing: 4px; font-size: 24px; color: #203340;">
-                            <span th:text="${code}"></span>
-                        </h2>
+                        <p>
+                            O registro de encerramento encontra-se pendente no sistema.
+                        </p>
+
+                        <p>
+                            Este e-mail foi enviado ao solicitante da ocorrência.
+                            Caso identifique alguma inconsistência nas informações ou tenha dúvidas,
+                            entre em contato diretamente com o avaliador de qualidade responsável pela ocorrência.
+                        </p>
+
+                        <br>
+
+                        <p><strong>Ocorrência:</strong> <i><span th:text="${occurCode}"></span></i></p>
+                        <p><strong>Tipo de Ocorrência:</strong> <i><span th:text="${occurType}"></span></i></p>
+                        <p><strong>Resumo:</strong> <i><span th:text="${occurTitle}"></span></i></p>
+                        <p><strong>Data do ocorrido:</strong> <i><span th:text="${occuredDate}"></span></i></p>
+                        <p><strong>Avaliação de qualidade:</strong> <i><span th:text="${inspectorReport}"></span></i></p>
+
+                        <p>
+                            <strong>Não conformidade gerada:</strong>
+                            <i><span th:text="${hasRNCOpened == 'true'} ? 'SIM' : 'NÃO'"></span></i>
+                        </p>
+
+                        <br>
                     </td>
                 </tr>
 
                 <!-- Button -->
                 <tr>
                     <td class="button-wrapper">
-                        <a th:href="${resetLink}">
-                            Alterar Senha
+                        <a th:href="${redirectUrl}">
+                            Leve-me até o Registro
                         </a>
                     </td>
                 </tr>

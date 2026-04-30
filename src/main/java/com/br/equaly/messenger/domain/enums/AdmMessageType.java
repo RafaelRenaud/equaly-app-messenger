@@ -1,0 +1,12 @@
+package com.br.equaly.messenger.domain.enums;
+
+public enum AdmMessageType {
+    COMPANY_CREATION,
+    COMPANY_UPDATE,
+    COMPANY_CREDENTIAL_CREATION,
+    COMPANY_CREDENTIAL_INACTIVATION,
+    DEPARTMENT_CREATION,
+    DEPARTMENT_UPDATE,
+    USER_CREATION,
+    USER_UPDATE
+}

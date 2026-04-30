@@ -7,19 +7,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AzureRecoveryQueueConfig {
+public class AuditQueueConfig {
 
-    @Value("${azure.storage.connection-string}")
+    @Value("${azure.app.connection-string}")
     private String connectionString;
 
-    @Value("${azure.storage.queue.recovery}")
-    private String recoveryQueue;
+    @Value("${azure.app.audit.queue}")
+    private String auditQueue;
 
     @Bean
-    public QueueClient recoveryQueueClient() {
+    public QueueClient auditQueueClient() {
         return new QueueClientBuilder()
                 .connectionString(connectionString)
-                .queueName(recoveryQueue)
+                .queueName(auditQueue)
                 .buildClient();
     }
 }

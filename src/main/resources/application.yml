@@ -1,8 +1,34 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+      database: equaly
+      auto-index-creation: true
 server:
   port: ${SERVER_PORT:8080}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
 azure:
   communication-service:
     connection-string: ${EMAIL_SERVER}
+    email: ${EMAIL_DOMAIN}
+  messenger:
+    connection-string: ${MESSENGER_MQ_SERVER}
+    recovery:
+      queue: ${RECOVERY_QUEUE}
+    admin-notification:
+      queue: ${ADMIN_NOTIFICATION_QUEUE}
+    core-notification:
+      queue: ${CORE_NOTIFICATION_QUEUE}
+  app:
+    connection-string: ${APP_MQ_SERVER}
+    audit:
+      queue: ${AUDIT_QUEUE}
+
+client:
+  equaly:
+    url: ${EQUALY_URL}
 
 logging:
   level:

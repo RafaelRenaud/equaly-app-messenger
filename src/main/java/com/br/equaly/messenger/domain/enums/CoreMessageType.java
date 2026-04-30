@@ -1,0 +1,12 @@
+package com.br.equaly.messenger.domain.enums;
+
+public enum CoreMessageType {
+    OCCUR_CREATED,
+    OCCUR_CREATED_EXTERNAL,
+    OCCUR_INSPECTION_REQUESTED,
+    OCCUR_EDIT_REQUESTED,
+    OCCUR_EDIT_CLOSED,
+    OCCUR_INSPECTED,
+    OCCUR_CLOSED,
+    OCCUR_FEEDBACK_REQUESTED
+}

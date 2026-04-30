@@ -1,5 +1,6 @@
 package com.br.equaly.messenger.domain.model;
 
+import com.br.equaly.messenger.domain.enums.RecoveryTokenType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -8,6 +9,9 @@ public class RecoveryToken implements Serializable {
 
     @JsonProperty("id")
     private String id;
+
+    @JsonProperty("recoveryTokenType")
+    private RecoveryTokenType recoveryTokenType;
 
     @JsonProperty("code")
     private String code;
@@ -27,8 +31,8 @@ public class RecoveryToken implements Serializable {
     @JsonProperty("companyName")
     private String companyName;
 
-    @JsonProperty("companyDisplayName")
-    private String companyDisplayName;
+    @JsonProperty("companyTradingName")
+    private String companyTradingName;
 
     @JsonProperty("companyAlias")
     private String companyAlias;
@@ -36,7 +40,7 @@ public class RecoveryToken implements Serializable {
     @JsonProperty("createdAt")
     private String createdAt;
 
-    public RecoveryToken(String id, String code, Long userId, String email, String username, String companyUsername, String companyName, String companyDisplayName, String companyAlias, String createdAt) {
+    public RecoveryToken(String id, String code, Long userId, String email, String username, String companyUsername, String companyName, String companyTradingName, String companyAlias, String createdAt) {
         this.id = id;
         this.code = code;
         this.userId = userId;
@@ -44,7 +48,7 @@ public class RecoveryToken implements Serializable {
         this.username = username;
         this.companyUsername = companyUsername;
         this.companyName = companyName;
-        this.companyDisplayName = companyDisplayName;
+        this.companyTradingName = companyTradingName;
         this.companyAlias = companyAlias;
         this.createdAt = createdAt;
     }
@@ -55,6 +59,14 @@ public class RecoveryToken implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public RecoveryTokenType getRecoveryTokenType() {
+        return recoveryTokenType;
+    }
+
+    public void setRecoveryTokenType(RecoveryTokenType recoveryTokenType) {
+        this.recoveryTokenType = recoveryTokenType;
     }
 
     public String getCode() {
@@ -105,12 +117,12 @@ public class RecoveryToken implements Serializable {
         this.companyName = companyName;
     }
 
-    public String getCompanyDisplayName() {
-        return companyDisplayName;
+    public String getCompanyTradingName() {
+        return companyTradingName;
     }
 
-    public void setCompanyDisplayName(String companyDisplayName) {
-        this.companyDisplayName = companyDisplayName;
+    public void setCompanyTradingName(String companyTradingName) {
+        this.companyTradingName = companyTradingName;
     }
 
     public String getCompanyAlias() {
@@ -142,7 +154,7 @@ public class RecoveryToken implements Serializable {
                 ", username='" + username + '\'' +
                 ", companyUsername='" + companyUsername + '\'' +
                 ", companyName='" + companyName + '\'' +
-                ", companyDisplayName='" + companyDisplayName + '\'' +
+                ", companyTradingName='" + companyTradingName + '\'' +
                 ", companyAlias='" + companyAlias + '\'' +
                 ", createdAt=" + createdAt +
                 '}';

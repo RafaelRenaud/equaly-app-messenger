@@ -1,14 +1,14 @@
 # Usar uma imagem base compatível com ARM e x86
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:21-jre-alpine
 
 # Criar o diretório de trabalho
 WORKDIR /app
 
 # Copiar o arquivo JAR gerado pelo Maven/Gradle
-COPY target/messenger-1.0.1.jar messenger-1.0.1.jar
+COPY target/equaly-app-messenger-1.0.16.jar equaly-app-messenger-1.0.16.jar
 
 # Expor a porta da aplicação
 EXPOSE 8080
 
 # Comando para iniciar a aplicação
-ENTRYPOINT ["java", "-jar", "messenger-1.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "equaly-app-messenger-1.0.16.jar"]

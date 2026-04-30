@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AzureEmailConfig {
+public class EmailConfig {
     @Value("${azure.communication-service.connection-string}")
     private String connectionString;
 
