@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read # This is required for actions/checkout
 
@@ -43,6 +44,20 @@ jobs:
         with:
           name: equaly-app-messenger
           path: .
+
+      - name: Debug downloaded files
+        run: |
+          echo "PWD:"
+          pwd
+          echo "FILES:"
+          ls -la
+          echo "FIND JAR:"
+          find . -name "*.jar"
+
+      - name: Show deploy package
+        run: |
+          echo "Deploying JAR:"
+          find . -name "*.jar"
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
