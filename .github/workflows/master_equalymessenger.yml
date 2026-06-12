@@ -65,5 +65,5 @@ jobs:
         with:
           app-name: 'equalymessenger'
           slot-name: 'Production'
-          package: '*.jar'
+          package: '**/*.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7A653FB56419470097A93E44774AECFD }}
