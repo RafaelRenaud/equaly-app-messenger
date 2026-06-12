@@ -1,14 +1,20 @@
-# Usar uma imagem base compatível com ARM e x86
-FROM eclipse-temurin:21-jre-alpine
+# Etapa de build
+FROM maven:3.9.11-eclipse-temurin-21 AS build
 
-# Criar o diretório de trabalho
 WORKDIR /app
 
-# Copiar o arquivo JAR gerado pelo Maven/Gradle
-COPY target/equaly-app-messenger-1.0.16.jar equaly-app-messenger-1.0.16.jar
+COPY pom.xml .
+COPY src ./src
 
-# Expor a porta da aplicação
+RUN mvn clean package -DskipTests
+
+# Etapa de runtime
+FROM eclipse-temurin:21-jre-alpine
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Comando para iniciar a aplicação
-ENTRYPOINT ["java", "-jar", "equaly-app-messenger-1.0.16.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
