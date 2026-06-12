@@ -48,6 +48,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'equalymessenger'
-          slot-name: 'Production'
           package: '*.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_36BEE49BB84B42EFBFD285E8D58144DE }}
